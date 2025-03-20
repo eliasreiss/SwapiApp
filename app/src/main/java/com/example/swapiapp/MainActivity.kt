@@ -52,7 +52,6 @@ class MainActivity : AppCompatActivity() {
                 val url = URL(urls[0])
                 val connection = url.openConnection() as HttpURLConnection
                 connection.requestMethod = "GET"
-
                 val reader = BufferedReader(InputStreamReader(connection.inputStream))
                 val response = reader.readText()
                 reader.close()
@@ -73,11 +72,9 @@ class MainActivity : AppCompatActivity() {
                 val birthYear = jsonObject.getString("birth_year")
                 val timestamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
                 resultView.text = "Name: $name\nGeburtsjahr: $birthYear"
-
-                val person = Person(name = name, birthYear = birthYear, timestamp = timestamp)
-                lifecycleScope.launch {
-                    db.personDao().insert(person)
-                }
+                Thread {
+                    db.personDao().insert(Person(name = name, birthYear = birthYear, timestamp = timestamp))
+                }.start()
             } catch (e: Exception) {
                 Toast.makeText(this@MainActivity, "Fehler beim Verarbeiten", Toast.LENGTH_SHORT).show()
             }

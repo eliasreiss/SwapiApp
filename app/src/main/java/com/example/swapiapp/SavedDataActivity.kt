@@ -15,9 +15,7 @@ class SavedDataActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_saved_data)
 
-        db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "swapi_db")
-            .allowMainThreadQueries() // Nur für Testzwecke, besser mit Coroutines arbeiten
-            .build()
+        db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "swapi_db").build()
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
