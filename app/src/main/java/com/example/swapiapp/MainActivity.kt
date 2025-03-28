@@ -29,7 +29,9 @@ class MainActivity : AppCompatActivity() {
         val fetchButton: Button = findViewById(R.id.fetchButton)
         val viewSavedButton: Button = findViewById(R.id.viewSavedButton)
 
-        db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "swapi_db").build()
+        db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "swapi_db")
+            .fallbackToDestructiveMigration() // Diese Zeile fügt die Migration hinzu
+            .build()
 
         fetchButton.setOnClickListener { fetchData() }
         viewSavedButton.setOnClickListener {
@@ -70,10 +72,33 @@ class MainActivity : AppCompatActivity() {
                 val jsonObject = JSONObject(result)
                 val name = jsonObject.getString("name")
                 val birthYear = jsonObject.getString("birth_year")
+                val height = jsonObject.getString("height")    // Größe abrufen
+                val mass = jsonObject.getString("mass")        // Gewicht abrufen
+                val hairColor = jsonObject.getString("hair_color")  // Haarfarbe abrufen
+                val eyeColor = jsonObject.getString("eye_color")    // Augenfarbe abrufen
                 val timestamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
-                resultView.text = "Name: $name\nGeburtsjahr: $birthYear"
+
+                resultView.text = """
+            Name: $name
+            Geburtsjahr: $birthYear
+            Größe: $height cm
+            Gewicht: $mass kg
+            Haarfarbe: $hairColor
+            Augenfarbe: $eyeColor
+        """.trimIndent()
+
                 Thread {
-                    db.personDao().insert(Person(name = name, birthYear = birthYear, timestamp = timestamp))
+                    db.personDao().insert(
+                        Person(
+                            name = name,
+                            birthYear = birthYear,
+                            height = height,
+                            mass = mass,
+                            hairColor = hairColor,
+                            eyeColor = eyeColor,
+                            timestamp = timestamp
+                        )
+                    )
                 }.start()
             } catch (e: Exception) {
                 Toast.makeText(this@MainActivity, "Fehler beim Verarbeiten", Toast.LENGTH_SHORT).show()
