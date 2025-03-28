@@ -8,6 +8,10 @@ data class Person(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val name: String,
     val birthYear: String,
+    val height: String,       // Neu: Größe
+    val mass: String,         // Neu: Gewicht
+    val hairColor: String,    // Neu: Haarfarbe
+    val eyeColor: String,     // Neu: Augenfarbe
     val timestamp: String
 )
 
@@ -26,7 +30,7 @@ interface PersonDao {
     fun delete(person: Person)
 }
 
-@Database(entities = [Person::class], version = 1, exportSchema = false)
+@Database(entities = [Person::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun personDao(): PersonDao
 }

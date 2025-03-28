@@ -19,6 +19,30 @@
         android:textSize="18sp" />
 
     <TextView
+        android:id="@+id/detailHeightView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/detailMassView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/detailHairColorView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/detailEyeColorView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp" />
+
+    <TextView
         android:id="@+id/detailTimestampView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -62,6 +62,10 @@ class SavedDataActivity : AppCompatActivity() {
         val intent = Intent(this, DetailActivity::class.java).apply {
             putExtra("name", person.name)
             putExtra("birthYear", person.birthYear)
+            putExtra("height", person.height)
+            putExtra("mass", person.mass)
+            putExtra("hairColor", person.hairColor)
+            putExtra("eyeColor", person.eyeColor)
             putExtra("timestamp", person.timestamp)
         }
         startActivity(intent)
