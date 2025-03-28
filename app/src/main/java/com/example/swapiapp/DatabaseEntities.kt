@@ -21,6 +21,9 @@ interface PersonDao {
 
     @Query("DELETE FROM people")
     fun deleteAll()
+
+    @Delete
+    fun delete(person: Person)
 }
 
 @Database(entities = [Person::class], version = 1, exportSchema = false)
