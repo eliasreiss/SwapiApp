@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SavedDataActivity" android:exported="true"/>
+        <activity android:name=".DetailActivity" />
     </application>
 
 </manifest>
