@@ -1,9 +1,9 @@
 package com.example.swapiapp
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,7 +24,11 @@ class SavedDataActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        adapter = PersonAdapter { person -> confirmDeletePerson(person) }
+        adapter = PersonAdapter(
+            onDeleteClick = { person -> confirmDeletePerson(person) },
+            onItemClick = { person -> navigateToDetail(person) } // NEU: Detailansicht öffnen
+        )
+
         recyclerView.adapter = adapter
 
         db.personDao().getAllPeople().observe(this, Observer { people ->
@@ -52,6 +56,15 @@ class SavedDataActivity : AppCompatActivity() {
             .setPositiveButton("Ja") { _, _ -> DeleteAllTask(db).execute() }
             .setNegativeButton("Nein", null)
             .show()
+    }
+
+    private fun navigateToDetail(person: Person) {
+        val intent = Intent(this, DetailActivity::class.java).apply {
+            putExtra("name", person.name)
+            putExtra("birthYear", person.birthYear)
+            putExtra("timestamp", person.timestamp)
+        }
+        startActivity(intent)
     }
 
     private class DeletePersonTask(val db: AppDatabase) : AsyncTask<Person, Void, Void>() {
