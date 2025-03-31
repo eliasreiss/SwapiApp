@@ -11,10 +11,16 @@ import androidx.recyclerview.widget.DiffUtil
 
 class PersonAdapter(
     private val onDeleteClick: (Person) -> Unit,
-    private val onItemClick: (Person) -> Unit // Neu: Item-Klick-Funktion für Detailansicht
+    private val onItemClick: (Person) -> Unit, // Neu: Item-Klick-Funktion für Detailansicht
+    private val onItemLongClick: (Person) -> Unit // Neu: Long-Click für Vergleich
 ) : ListAdapter<Person, PersonAdapter.PersonViewHolder>(PersonDiffCallback()) {
 
-    class PersonViewHolder(itemView: View, val onDeleteClick: (Person) -> Unit, val onItemClick: (Person) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    class PersonViewHolder(
+        itemView: View,
+        val onDeleteClick: (Person) -> Unit,
+        val onItemClick: (Person) -> Unit,
+        val onItemLongClick: (Person) -> Unit
+    ) : RecyclerView.ViewHolder(itemView) {
         val nameView: TextView = itemView.findViewById(R.id.nameView)
         val birthYearView: TextView = itemView.findViewById(R.id.birthYearView)
         val timestampView: TextView = itemView.findViewById(R.id.timestampView)
@@ -30,13 +36,19 @@ class PersonAdapter(
 
             // Gesamt-Item-Klick für Detailansicht
             itemView.setOnClickListener { onItemClick(person) }
+
+            // Long-Click für Vergleichsauswahl
+            itemView.setOnLongClickListener {
+                onItemLongClick(person)
+                true // Gibt an, dass das Event verarbeitet wurde
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_person, parent, false)
-        return PersonViewHolder(view, onDeleteClick, onItemClick) // Beides übergeben
+        return PersonViewHolder(view, onDeleteClick, onItemClick, onItemLongClick) // Alle Callback-Funktionen übergeben
     }
 
     override fun onBindViewHolder(holder: PersonViewHolder, position: Int) {
