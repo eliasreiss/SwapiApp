@@ -10,6 +10,15 @@
         android:layout_height="wrap_content"
         android:text="Hier werden gespeicherte Daten angezeigt" />
 
+    <Button
+        android:id="@+id/compareButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vergleichen"
+        android:layout_margin="16dp"
+        android:visibility="visible"
+        android:layout_gravity="top|center_horizontal"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
