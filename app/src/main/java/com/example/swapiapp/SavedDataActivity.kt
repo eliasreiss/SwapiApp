@@ -31,7 +31,9 @@ class SavedDataActivity : AppCompatActivity() {
         adapter = PersonAdapter(
             onDeleteClick = { person -> confirmDeletePerson(person) },
             onItemClick = { person -> handleItemClick(person) },
-            onItemLongClick = { person -> toggleSelection(person) }
+            onSelectionToggle = { person -> toggleSelection(person) },
+            isCompareMode = { isCompareMode },
+            selectedPeople = { selectedPeople }
         )
 
         recyclerView.adapter = adapter
@@ -68,6 +70,8 @@ class SavedDataActivity : AppCompatActivity() {
             }
         }
 
+        adapter.notifyDataSetChanged() // Aktualisiere das UI
+
         if (selectedPeople.size == 2) {
             startComparison()
         }
@@ -76,6 +80,7 @@ class SavedDataActivity : AppCompatActivity() {
     private fun toggleCompareMode() {
         isCompareMode = !isCompareMode
         selectedPeople.clear()
+        adapter.notifyDataSetChanged() // UI aktualisieren
         Toast.makeText(this, if (isCompareMode) "Vergleichsmodus aktiviert" else "Vergleichsmodus deaktiviert", Toast.LENGTH_SHORT).show()
     }
 
@@ -88,6 +93,7 @@ class SavedDataActivity : AppCompatActivity() {
             startActivity(intent)
             isCompareMode = false
             selectedPeople.clear()
+            adapter.notifyDataSetChanged()
         }
     }
 
