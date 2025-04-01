@@ -8,5 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="delete_red">#D32F2F</color> <!-- Dunkelrot für den Löschen-Button -->
-    <color name="selected_item_background">#CCCCCC</color> <!-- Leicht grauer Hintergrund -->
+    <color name="selected_item_background">#DDDDDD</color>
 </resources>

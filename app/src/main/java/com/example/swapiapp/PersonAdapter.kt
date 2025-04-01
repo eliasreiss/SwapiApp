@@ -46,11 +46,12 @@ class PersonAdapter(
                 }
             }
 
-            // Hintergrundfarbe ändern, wenn die Person ausgewählt ist
-            itemView.setBackgroundColor(
-                if (isSelected) ContextCompat.getColor(itemView.context, R.color.selected_item_background)
-                else ContextCompat.getColor(itemView.context, android.R.color.transparent)
-            )
+            // Hintergrundfarbe ändern, wenn die Person für den Vergleich ausgewählt ist
+            if (isCompareMode && isSelected) {
+                itemView.setBackgroundResource(R.drawable.selected_item_background) // Dunklere Hintergrundfarbe mit abgerundeten Ecken
+            } else {
+                itemView.setBackgroundResource(R.drawable.default_item_background) // Standard-Hintergrund
+            }
         }
     }
 
