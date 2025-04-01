@@ -3,13 +3,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:gravity="center_horizontal">
+
+    <!-- Star Wars Logo oben -->
+    <ImageView
+        android:id="@+id/starWarsLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:src="@drawable/starwars"
+        android:contentDescription="Star Wars Logo"
+        android:layout_gravity="center" />
+
+    <!-- Abstand zwischen Logo und Eingabefeld -->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
 
     <EditText
         android:id="@+id/inputId"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Gib eine ID ein" />
+        android:layout_height="48dp"
+        android:minHeight="48dp"
+        android:hint="Gib eine ID ein"
+        android:padding="8dp"/>
 
     <Button
         android:id="@+id/fetchButton"
