@@ -3,7 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:gravity="center_horizontal">
+
+    <!-- Star Wars Logo oben -->
+    <ImageView
+        android:id="@+id/starWarsLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:src="@drawable/starwars"
+        android:contentDescription="Star Wars Logo"
+        android:layout_gravity="center" />
+
+    <!-- Abstand zwischen Logo und Eingabefeld -->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
 
     <!-- Star Wars Logo oben -->
     <ImageView
